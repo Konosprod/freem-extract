@@ -13,7 +13,7 @@ BASE_PAGE_URL = BASE_URL + "/win/category/4/page-"
 
 def get_source(url):
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
-    r = requests.get(url, headers=headers)
+    r = requests.get(url, headers=headers, allow_redirects=False)
     #Sleep to not getting rejected
     sleep(1)
     return bs4.BeautifulSoup(r.text, "html.parser")
