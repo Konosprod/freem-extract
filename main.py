@@ -12,7 +12,8 @@ BASE_URL = "https://www.freem.ne.jp"
 BASE_PAGE_URL = BASE_URL + "/win/category/4/page-"
 
 def get_source(url):
-    r = requests.get(url)
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
+    r = requests.get(url, headers=headers)
     #Sleep to not getting rejected
     sleep(1)
     return bs4.BeautifulSoup(r.text, "html.parser")
@@ -71,13 +72,15 @@ def main():
 
     games = []
     page = 0
-    
+
     while True:
+        print("Get page n°" + str(page))
         src = get_source(BASE_PAGE_URL + str(page))
         games_urls = get_games(src)
 
         if games_urls is not None:
             for url in games_urls:
+                print("Get game  : " + url)
                 src = get_source(url)
                 game_infos = get_game_info(src)
                 game_infos["url"] = url
