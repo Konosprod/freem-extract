@@ -76,6 +76,7 @@ def main():
             for url in games_urls:
                 src = get_source(url)
                 game_infos = get_game_info(src)
+                game_infos["url"] = url
                 games.append(game_infos)
         else:
             break
