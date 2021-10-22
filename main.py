@@ -10,7 +10,6 @@ katsu.use_foreign_spelling = False
 
 BASE_URL = "https://www.freem.ne.jp"
 BASE_PAGE_URL = BASE_URL + "/win/category/4/page-"
-page = 0
 
 def get_source(url):
     r = requests.get(url)
@@ -71,6 +70,8 @@ def get_game_info(src):
 def main():
 
     games = []
+    page = 0
+    
     while True:
         src = get_source(BASE_PAGE_URL + str(page))
         games_urls = get_games(src)
