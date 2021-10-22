@@ -2,6 +2,7 @@ import bs4
 import requests
 import cutlet
 import json
+from time import sleep
 
 #Romaji translation without using foreign spelling
 katsu = cutlet.Cutlet()
@@ -13,6 +14,8 @@ page = 0
 
 def get_source(url):
     r = requests.get(url)
+    #Sleep to not getting rejected
+    sleep(1)
     return bs4.BeautifulSoup(r.text, "html.parser")
 
 def get_games(src):
